@@ -21,6 +21,6 @@ Features
  Prerequisites
 - Node.js ≥ 16
 - npm or yarn
-Installation
+
 
 
