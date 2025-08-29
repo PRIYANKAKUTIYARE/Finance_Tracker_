@@ -1,14 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import Header from "@/components/Header";
+// import { clerkClient } from "@clerk/nextjs/dist/types/server";
+import { ClerkProvider } from "@clerk/nextjs";
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata = {
@@ -18,12 +16,31 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider> 
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+        className={`${inter.className} bg-gray-100 text-gray-900 min-h-screen flex flex-col`}>
+        {/* header */}
+        <Header />  
+
+        {/* main content */}
+        <main className="min-h-screen flex-grow container mx-auto px-4 py-8 pt-20">
+          {children}
+        </main>
+
+        {/* footer */}
+       <footer className="w-full bg-[#1d2939] text-white py-8 text-center">
+          <p className="text-sm sm:text-base">
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="font-semibold">FinTechAi</span>. All rights reserved.
+          </p>
+          <p className="text-xs sm:text-sm mt-1 text-gray-300">
+            Made With <span className="text-red-500">❤️</span> By{" "}
+            <span className="font-medium">Priyanka</span>
+          </p>
+        </footer>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
